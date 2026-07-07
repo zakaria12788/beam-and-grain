@@ -10,46 +10,27 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+  /* Seamlessly fits the family image inside your existing box frame layout */
   .hero-gallery-box {
     position: relative;
-    border: 1px solid rgba(224, 168, 81, 0.15);
-    background: #14120f;
-    padding: 20px;
-    border-radius: 4px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    transition: border-color 0.3s ease;
   }
 
   .hero-portrait-img {
     width: 100%;
     height: auto;
-    max-width: 420px;
     border-radius: 2px;
     display: block;
     transition: filter 0.3s ease;
   }
 
-  /* Laser-engraved burn light glow effect on hover */
-  .hero-gallery-box:hover {
-    border-color: rgba(255, 189, 89, 0.4);
-  }
-  
+  /* Mimics your signature laser-engraved light glow on hover */
   .hero-gallery-box:hover .hero-portrait-img {
-    filter: drop-shadow(0 0 8px rgba(255, 189, 89, 0.5));
-  }
-
-  .vector-label {
-    margin-top: 15px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: rgba(224, 168, 81, 0.5);
-    text-transform: uppercase;
+    filter: drop-shadow(0 0 12px rgba(255, 189, 89, 0.45));
   }
 </style>
 </head>
@@ -70,25 +51,24 @@
 </nav>
 
 <section class="hero page-head">
-  <div class="wrap" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+  <div class="wrap">
     
-    <!-- Left Copy Column -->
+    <!-- Left Column: Copy & Actions -->
     <div class="hero-text">
-      <div class="section-eyebrow" style="color: #e0a851; margin-bottom: 12px;">Hamilton, Ontario</div>
-      <h1 style="font-family: 'Fraunces', serif; font-size: 56px; line-height: 1.1; margin-bottom: 24px; color: #fff;">Your face,<br>cut in <span style="font-style: italic; color: #e0a851;">light.</span></h1>
-      <p style="font-family: 'Inter', sans-serif; font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 32px; max-width: 440px;">
+      <div class="section-eyebrow">Hamilton, Ontario</div>
+      <h1>Your face,<br>cut in <span class="logo-mark-inline" style="color: var(--brand); font-style: italic;">light.</span></h1>
+      <p>
         Beam & Grain turns a photo into a portrait burned line by line into real wood — no ink, no print, just a laser and the grain underneath. Small batch, made to order, finished by hand.
       </p>
-      <div class="hero-actions" style="display: flex; gap: 16px;">
-        <a href="contact.html" class="nav-cta" style="padding: 14px 28px; background: #e0a851; color: #1c1915; font-weight: 600; text-decoration: none; border-radius: 2px;">Start your portrait</a>
-        <a href="portraits.html" style="padding: 14px 28px; border: 1px solid rgba(255,255,255,0.15); color: #fff; font-weight: 500; text-decoration: none; border-radius: 2px;">See the work</a>
+      <div class="hero-actions">
+        <a href="contact.html" class="nav-cta">Start your portrait</a>
+        <a href="portraits.html" class="btn-secondary" style="margin-left: 12px; display: inline-block;">See the work</a>
       </div>
     </div>
 
-    <!-- Right Animated Column -->
+    <!-- Right Column: Replaced the old outline with the high-res family portrait asset -->
     <div class="hero-gallery-box">
       <img src="hero-portrait.png" class="hero-portrait-img" alt="Cinematic laser engraved family portrait with dog">
-      <div class="vector-label">CINEMATIC LIVE DRAW — 210M PATH</div>
     </div>
 
   </div>
