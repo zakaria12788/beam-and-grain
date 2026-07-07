@@ -42,10 +42,25 @@
       <form onsubmit="event.preventDefault(); alert('This form needs an email service connected \u2014 try Formspree or a mailto link for now.');">
         <label for="name">Name</label>
         <input id="name" type="text" placeholder="Your name" required>
+        
         <label for="email">Email</label>
         <input id="email" type="email" placeholder="you@email.com" required>
+
+        <!-- Added Reference Photo Drop Zone -->
+        <label>Reference Photo</label>
+        <div class="drop-zone" id="contact-drop-zone" tabindex="0" role="button" aria-label="Upload your portrait reference photo">
+          <svg viewBox="0 0 24 24"><path d="M12 16V4M12 4L6 10M12 4l6 6"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          <div class="dz-title" id="contact-dz-title">Drop your photo here, or click to browse</div>
+          <span>JPG or PNG works best</span>
+        </div>
+        <input type="file" id="contact-file-input" accept="image/*" style="display:none;">
+        <div id="contact-preview-wrap" style="margin-top: 12px; display: none;">
+          <img id="contact-preview" alt="Reference preview" style="width: 100%; border-radius: 2px; border: 1px solid var(--char-line);">
+        </div>
+
         <label for="details">What do you have in mind?</label>
         <textarea id="details" rows="3" placeholder="Size, wood, occasion &mdash; whatever you know so far"></textarea>
+        
         <button type="submit">Send request</button>
         <p class="form-note">This is a placeholder form &mdash; connect it to Formspree, or swap it for a mailto: link, before going live.</p>
       </form>
@@ -60,5 +75,45 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  const dropZone = document.getElementById('contact-drop-zone');
+  const fileInput = document.getElementById('contact-file-input');
+  const previewWrap = document.getElementById('contact-preview-wrap');
+  const previewImg = document.getElementById('contact-preview');
+  const dzTitle = document.getElementById('contact-dz-title');
+
+  // Click handler to trigger hidden file browser
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+
+  // Handle visual drag-and-drop states
+  ['dragover','dragenter'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add('dragover'); }));
+  ['dragleave','drop'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove('dragover'); }));
+  
+  // Handle file assignment from dropping
+  dropZone.addEventListener('drop', e => {
+    const file = e.dataTransfer.files[0];
+    if(file) handleFile(file);
+  });
+  
+  // Handle file assignment from browser dialogue selection
+  fileInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(file) handleFile(file);
+  });
+
+  function handleFile(file){
+    if(!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewImg.src = e.target.result;
+      previewWrap.style.display = 'block';
+      dzTitle.textContent = "Photo attached: " + file.name;
+    };
+    reader.readAsDataURL(file);
+  }
+})();
+</script>
 </body>
 </html>
