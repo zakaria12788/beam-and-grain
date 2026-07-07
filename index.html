@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-  /* Cinematic Live Draw Animation Styles */
   .hero-gallery-box {
     position: relative;
     border: 1px solid rgba(224, 168, 81, 0.15);
@@ -23,38 +22,25 @@
     justify-content: center;
     aspect-ratio: 1 / 1;
     overflow: hidden;
+    transition: border-color 0.3s ease;
   }
 
-  .family-svg {
+  .hero-portrait-img {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 420px;
-  }
-
-  .family-svg path {
-    stroke: #e0a851;
-    stroke-width: 1.2;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    opacity: 0.9;
-    /* High dasharray value to account for long detailed continuous paths */
-    stroke-dasharray: 4000;
-    stroke-dashoffset: 4000;
-    animation: drawDetailedPortrait 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  }
-
-  @keyframes drawDetailedPortrait {
-    to {
-      stroke-dashoffset: 0;
-    }
+    border-radius: 2px;
+    display: block;
+    transition: filter 0.3s ease;
   }
 
   /* Laser-engraved burn light glow effect on hover */
-  .hero-gallery-box:hover .family-svg path {
-    stroke: #ffbd59;
-    filter: drop-shadow(0 0 5px rgba(255, 189, 89, 0.7));
-    transition: stroke 0.3s ease, filter 0.3s ease;
+  .hero-gallery-box:hover {
+    border-color: rgba(255, 189, 89, 0.4);
+  }
+  
+  .hero-gallery-box:hover .hero-portrait-img {
+    filter: drop-shadow(0 0 8px rgba(255, 189, 89, 0.5));
   }
 
   .vector-label {
@@ -99,26 +85,9 @@
       </div>
     </div>
 
-    <!-- Right Animated Vector Column -->
+    <!-- Right Animated Column -->
     <div class="hero-gallery-box">
-      <svg class="family-svg" viewBox="0 0 500 500">
-        <!-- Complex detailed path trace for family & dog layout -->
-        <path d="
-          M 180,180 C 175,150 200,120 230,120 C 260,120 285,150 280,180 C 275,210 260,230 230,230 C 200,230 185,210 180,180 Z
-          M 195,165 C 200,160 210,160 215,165 M 245,165 C 250,160 260,160 265,165 
-          M 210,175 C 215,172 220,172 225,175 M 250,175 C 255,172 260,172 265,175
-          M 215,195 C 225,205 235,205 245,195 M 200,225 C 150,250 120,290 100,380 M 260,225 C 290,250 330,290 350,380
-          M 295,220 C 290,190 320,165 350,165 C 380,165 410,190 405,220 C 400,265 380,280 350,280 C 320,280 300,265 295,220 Z
-          M 315,205 C 320,200 330,200 335,205 M 365,205 C 370,200 380,200 385,205
-          M 330,235 C 340,245 360,245 370,235 M 305,275 C 320,300 360,330 430,370 M 390,265 C 410,290 440,320 470,360
-          M 225,245 C 220,220 240,200 265,200 C 290,200 310,220 305,245 C 300,270 290,285 265,285 C 240,285 230,270 225,245 Z
-          M 240,230 C 243,227 250,227 253,230 M 277,230 C 280,227 287,227 290,230
-          M 250,255 C 258,262 272,262 280,255 M 235,275 C 220,300 200,330 190,380 M 295,275 C 310,300 320,330 330,380
-          M 270,330 C 250,310 320,290 360,320 C 400,340 410,380 390,420 C 370,440 310,440 290,410 C 270,395 275,350 270,330 Z
-          M 300,345 C 295,360 310,380 320,370 M 360,350 C 365,365 350,385 340,375
-          M 315,395 C 330,415 340,415 355,395 M 320,400 C 330,410 340,410 350,400
-        " />
-      </svg>
+      <img src="hero-portrait.png" class="hero-portrait-img" alt="Cinematic laser engraved family portrait with dog">
       <div class="vector-label">CINEMATIC LIVE DRAW — 210M PATH</div>
     </div>
 
