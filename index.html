@@ -3,14 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beam & Grain — Laser-Engraved Portraits, Hamilton ON</title>
+<title>Beam & Grain — Custom Wood Portraits</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
+<style>
+  /* Cinematic Live Draw Animation Styles */
+  .hero-gallery-box {
+    position: relative;
+    border: 1px solid rgba(224, 168, 81, 0.15);
+    background: #14120f;
+    padding: 30px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .family-svg {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+  }
+
+  .family-svg path {
+    stroke: #e0a851;
+    stroke-width: 1.2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.85;
+    /* Triggers the live-drawing vector effect */
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
+    animation: drawPortrait 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes drawPortrait {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Light glow effect on hover */
+  .hero-gallery-box:hover .family-svg path {
+    stroke: #ffbd59;
+    filter: drop-shadow(0 0 4px rgba(255, 189, 89, 0.6));
+    transition: stroke 0.3s ease, filter 0.3s ease;
+  }
+
+  .vector-label {
+    margin-top: 20px;
+    font-family: 'IBM+Plex+Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(224, 168, 81, 0.5);
+    text-transform: uppercase;
+  }
+</style>
 </head>
 <body>
+
 <nav>
   <div class="wrap">
     <a href="index.html" class="logo"><span class="logo-mark"></span>Beam &amp; Grain</a>
@@ -25,65 +81,38 @@
   </div>
 </nav>
 
-<div id="intro-overlay">
-  <div class="intro-inner">
-    <div class="intro-beam"></div>
-    <h1 class="intro-word">BEAM<span>&amp;</span>GRAIN</h1>
-    <p class="intro-tag">Laser-engraved portraits &mdash; Hamilton, ON</p>
-  </div>
-</div>
-
-<header class="hero wrap">
-  <div>
-    <div class="eyebrow">Hamilton, Ontario</div>
-    <h1>Your face,<br>cut in <em>light.</em></h1>
-    <p class="sub">Beam &amp; Grain turns a photo into a portrait burned line by line into real wood &mdash; no ink, no print, just a laser and the grain underneath. Small batch, made to order, finished by hand.</p>
-    <div class="btn-row">
-      <a href="contact.html" class="btn-primary">Start your portrait</a>
-      <a href="portraits.html" class="btn-ghost">See the work</a>
-    </div>
-  </div>
-  <div class="beam-stage">
-    <svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg">
-      <path id="portrait-path" d="M 118,96 C 90,140 84,190 96,236 C 84,270 82,310 100,344 C 92,368 96,392 118,404 C 140,414 168,412 186,398 C 210,404 236,398 250,378 C 268,382 286,368 288,344 C 300,326 300,300 286,282 C 296,254 292,220 270,200 C 280,172 274,140 250,120 C 254,96 240,74 214,66 C 220,44 202,26 174,26 C 150,26 132,42 130,64 C 108,68 96,84 96,104"/>
-      <circle id="beam-head" r="4"/>
-    </svg>
-    <div class="caption-tag">LIVE ENGRAVE &mdash; 0.06mm PASS</div>
-  </div>
-</header>
-
-<div class="wrap"><hr class="divider"></div>
-
-<section id="roadmap-teaser">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="section-eyebrow">Where this is going</div>
-      <h2>Portraits first, then the rest of the shop</h2>
-      <p>Beam &amp; Grain is starting with portraits and growing from there &mdash; <a href="roadmap.html" style="color:var(--ember-bright);text-decoration:underline;">see the full roadmap</a>.</p>
-    </div>
-    <div class="roadmap">
-      <div class="road-line"></div>
-      <div class="road-items">
-        <div class="road-item active">
-          <div class="road-dot"></div>
-          <span class="road-status">Live now</span>
-          <h3>Custom portraits</h3>
-          <p>Photo-to-wood portraits, made to order and finished by hand in Hamilton.</p>
-        </div>
-        <div class="road-item">
-          <div class="road-dot"></div>
-          <span class="road-status">Next</span>
-          <h3>Custom items</h3>
-          <p>Engraved gifts, signage, and small keepsakes beyond the portrait format.</p>
-        </div>
-        <div class="road-item">
-          <div class="road-dot"></div>
-          <span class="road-status">Vision</span>
-          <h3>Custom furniture</h3>
-          <p>Engraved detailing on built furniture pieces, drawing on family MDF craft.</p>
-        </div>
+<section class="hero page-head">
+  <div class="wrap" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+    
+    <!-- Left Copy Column -->
+    <div class="hero-text">
+      <div class="section-eyebrow" style="color: #e0a851; margin-bottom: 12px;">Hamilton, Ontario</div>
+      <h1 style="font-family: 'Fraunces', serif; font-size: 56px; line-height: 1.1; margin-bottom: 24px; color: #fff;">Your face,<br>cut in <span style="font-style: italic; color: #e0a851;">light.</span></h1>
+      <p style="font-family: 'Inter', sans-serif; font-size: 16px; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 32px; max-width: 440px;">
+        Beam & Grain turns a photo into a portrait burned line by line into real wood — no ink, no print, just a laser and the grain underneath. Small batch, made to order, finished by hand.
+      </p>
+      <div class="hero-actions" style="display: flex; gap: 16px;">
+        <a href="contact.html" class="nav-cta" style="padding: 14px 28px; background: #e0a851; color: #1c1915; font-weight: 600; text-decoration: none; border-radius: 2px;">Start your portrait</a>
+        <a href="portraits.html" style="padding: 14px 28px; border: 1px solid rgba(255,255,255,0.15); color: #fff; font-weight: 500; text-decoration: none; border-radius: 2px;">See the work</a>
       </div>
     </div>
+
+    <!-- Right Animated Vector Column -->
+    <div class="hero-gallery-box">
+      <!-- Native Vector Paths for Family and Dog -->
+      <svg class="family-svg" viewBox="0 0 200 200">
+        <!-- Father Outline -->
+        <path d="M55,60 C55,40 75,35 85,45 C90,40 100,42 105,55 C105,70 95,85 85,85 C70,85 55,75 55,60 M62,52 C65,50 70,50 72,53 M88,53 C90,50 95,50 98,52 M70,68 C75,75 80,75 85,68 M55,78 C40,95 30,120 35,160 M100,74 C115,90 125,110 135,140" />
+        <!-- Mother Outline -->
+        <path d="M115,70 C110,45 130,40 145,45 C155,50 165,65 160,90 C155,110 140,115 130,115 C115,115 115,90 115,70 M125,65 C128,62 134,62 136,65 M144,65 C146,62 152,62 155,65 M132,82 C138,88 144,88 148,82 M152,88 C165,105 180,120 190,150" />
+        <!-- Child Outline -->
+        <path d="M90,95 C85,80 105,75 115,85 C120,95 115,115 105,115 C95,115 90,105 90,95 M96,92 C100,90 104,92 105,94 M111,94 C112,92 116,90 120,92 M100,104 C104,108 108,108 112,104 M92,112 C85,125 80,140 82,160 M116,112 C122,125 128,140 126,160" />
+        <!-- Dog Outline (Bottom Right) -->
+        <path d="M125,145 C120,130 145,120 165,135 C180,145 185,170 175,190 C165,195 145,195 135,185 C125,175 128,155 125,145 M132,148 C130,155 135,165 140,160 M165,152 C168,158 162,168 158,162 M142,175 C148,185 152,185 158,175 M144,178 C148,182 152,182 156,178" />
+      </svg>
+      <div class="vector-label">Cinematic Live Draw — 210m Path</div>
+    </div>
+
   </div>
 </section>
 
@@ -93,14 +122,6 @@
     <div>Made to order, one panel at a time</div>
   </div>
 </footer>
-<script>
-(function(){
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(prefersReduced){
-    const el = document.getElementById('intro-overlay');
-    if(el){ el.style.display = 'none'; }
-  }
-})();
-</script>
+
 </body>
 </html>
