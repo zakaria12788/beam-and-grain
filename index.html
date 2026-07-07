@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beam & Grain — Laser-Engraved Portraits, Hamilton ON</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="logo-mark"></span>Beam &amp; Grain</a>
+    <div class="nav-links">
+      <a href="portraits.html">Portraits</a>
+      <a href="process.html">Process</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="quote.html">Get a Quote</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<div id="intro-overlay">
+  <div class="intro-inner">
+    <div class="intro-beam"></div>
+    <h1 class="intro-word">BEAM<span>&amp;</span>GRAIN</h1>
+    <p class="intro-tag">Laser-engraved portraits &mdash; Hamilton, ON</p>
+  </div>
+</div>
+
+<header class="hero wrap">
+  <div>
+    <div class="eyebrow">Hamilton, Ontario</div>
+    <h1>Your face,<br>cut in <em>light.</em></h1>
+    <p class="sub">Beam &amp; Grain turns a photo into a portrait burned line by line into real wood &mdash; no ink, no print, just a laser and the grain underneath. Small batch, made to order, finished by hand.</p>
+    <div class="btn-row">
+      <a href="contact.html" class="btn-primary">Start your portrait</a>
+      <a href="portraits.html" class="btn-ghost">See the work</a>
+    </div>
+  </div>
+  <div class="beam-stage">
+    <svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg">
+      <path id="portrait-path" d="M 118,96 C 90,140 84,190 96,236 C 84,270 82,310 100,344 C 92,368 96,392 118,404 C 140,414 168,412 186,398 C 210,404 236,398 250,378 C 268,382 286,368 288,344 C 300,326 300,300 286,282 C 296,254 292,220 270,200 C 280,172 274,140 250,120 C 254,96 240,74 214,66 C 220,44 202,26 174,26 C 150,26 132,42 130,64 C 108,68 96,84 96,104"/>
+      <circle id="beam-head" r="4"/>
+    </svg>
+    <div class="caption-tag">LIVE ENGRAVE &mdash; 0.06mm PASS</div>
+  </div>
+</header>
+
+<div class="wrap"><hr class="divider"></div>
+
+<section id="roadmap-teaser">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Where this is going</div>
+      <h2>Portraits first, then the rest of the shop</h2>
+      <p>Beam &amp; Grain is starting with portraits and growing from there &mdash; <a href="roadmap.html" style="color:var(--ember-bright);text-decoration:underline;">see the full roadmap</a>.</p>
+    </div>
+    <div class="roadmap">
+      <div class="road-line"></div>
+      <div class="road-items">
+        <div class="road-item active">
+          <div class="road-dot"></div>
+          <span class="road-status">Live now</span>
+          <h3>Custom portraits</h3>
+          <p>Photo-to-wood portraits, made to order and finished by hand in Hamilton.</p>
+        </div>
+        <div class="road-item">
+          <div class="road-dot"></div>
+          <span class="road-status">Next</span>
+          <h3>Custom items</h3>
+          <p>Engraved gifts, signage, and small keepsakes beyond the portrait format.</p>
+        </div>
+        <div class="road-item">
+          <div class="road-dot"></div>
+          <span class="road-status">Vision</span>
+          <h3>Custom furniture</h3>
+          <p>Engraved detailing on built furniture pieces, drawing on family MDF craft.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Beam &amp; Grain &mdash; Hamilton, ON</div>
+    <div>Made to order, one panel at a time</div>
+  </div>
+</footer>
+<script>
+(function(){
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(prefersReduced){
+    const el = document.getElementById('intro-overlay');
+    if(el){ el.style.display = 'none'; }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get a Quote — Beam & Grain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="logo-mark"></span>Beam &amp; Grain</a>
+    <div class="nav-links">
+      <a href="portraits.html">Portraits</a>
+      <a href="process.html">Process</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="quote.html" aria-current="page">Get a Quote</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section id="quote" class="page-head">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Instant estimate</div>
+      <h2>Upload a photo, get a rough price</h2>
+      <p>The estimator scans the photo for how many distinct line segments it would take to engrave, then prices it using the base-plus-detail model from the <a href="pricing.html" style="color:var(--ember-bright);text-decoration:underline;">pricing page</a>. It's a starting point, not a final quote.</p>
+    </div>
+    <div class="quote-panel">
+      <div>
+        <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-label="Upload a photo for an estimate">
+          <svg viewBox="0 0 24 24"><path d="M12 16V4M12 4L6 10M12 4l6 6"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+          <div class="dz-title">Drop a photo, or click to choose</div>
+          <span>JPG or PNG works best</span>
+        </div>
+        <input type="file" id="quote-file-input" accept="image/*">
+        <div id="quote-preview-wrap"><img id="quote-preview" alt="Uploaded photo preview"></div>
+        <canvas id="quote-canvas" style="display:none;"></canvas>
+        <div class="rate-line">
+          <span>Size:</span>
+          <select id="size-select">
+            <option value="57">5&times;7 in &mdash; $55 base</option>
+            <option value="810" selected>8&times;10 in &mdash; $85 base</option>
+            <option value="1114">11&times;14 in &mdash; $125 base</option>
+          </select>
+        </div>
+      </div>
+      <div class="quote-result" id="quote-result">
+        <p class="quote-idle" id="quote-idle">Upload a photo on the left &mdash; the estimate appears here once it's scanned.</p>
+      </div>
+    </div>
+    <p class="quote-note">This runs entirely in the browser and estimates complexity from edge detail in the image &mdash; it's a heuristic, not the actual toolpath your laser software will generate. Confirm real cut counts with a test run on your machine before quoting customers off this number alone.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Beam &amp; Grain &mdash; Hamilton, ON</div>
+    <div>Made to order, one panel at a time</div>
+  </div>
+</footer>
+<script>
+(function(){
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('quote-file-input');
+  const previewWrap = document.getElementById('quote-preview-wrap');
+  const previewImg = document.getElementById('quote-preview');
+  const canvas = document.getElementById('quote-canvas');
+  const resultBox = document.getElementById('quote-result');
+  const sizeSelect = document.getElementById('size-select');
+
+  const PRICING = {
+    '57':   { label: '5x7 in',   base: 55,  included: 120, step: 8  },
+    '810':  { label: '8x10 in',  base: 85,  included: 180, step: 10 },
+    '1114': { label: '11x14 in', base: 125, included: 260, step: 14 },
+  };
+
+  let lastCuts = null;
+
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+  ['dragover','dragenter'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.add('dragover'); }));
+  ['dragleave','drop'].forEach(evt => dropZone.addEventListener(evt, e => { e.preventDefault(); dropZone.classList.remove('dragover'); }));
+  dropZone.addEventListener('drop', e => {
+    const file = e.dataTransfer.files[0];
+    if(file) handleFile(file);
+  });
+  fileInput.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(file) handleFile(file);
+  });
+  sizeSelect.addEventListener('change', renderResult);
+
+  function handleFile(file){
+    if(!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewImg.src = e.target.result;
+      previewWrap.classList.add('show');
+      const img = new Image();
+      img.onload = () => analyzeImage(img);
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function analyzeImage(img){
+    resultBox.innerHTML = '<p class="quote-idle">Scanning photo for line detail...</p>';
+    const maxDim = 260;
+    const scale = Math.min(maxDim / img.width, maxDim / img.height, 1);
+    const w = Math.max(1, Math.round(img.width * scale));
+    const h = Math.max(1, Math.round(img.height * scale));
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    const imageData = ctx.getImageData(0, 0, w, h);
+    const gray = toGrayscale(imageData, w, h);
+    const edges = sobelEdges(gray, w, h);
+    const cuts = countCutPaths(edges, w, h);
+    lastCuts = cuts;
+    renderResult();
+  }
+
+  function toGrayscale(imageData, w, h){
+    const d = imageData.data;
+    const out = new Float32Array(w*h);
+    for(let i=0; i<w*h; i++){
+      const r = d[i*4], g = d[i*4+1], b = d[i*4+2];
+      out[i] = 0.299*r + 0.587*g + 0.114*b;
+    }
+    return out;
+  }
+
+  function sobelEdges(gray, w, h){
+    const gx = [-1,0,1,-2,0,2,-1,0,1];
+    const gy = [-1,-2,-1,0,0,0,1,2,1];
+    const out = new Uint8Array(w*h);
+    const threshold = 90;
+    for(let y=1; y<h-1; y++){
+      for(let x=1; x<w-1; x++){
+        let sx = 0, sy = 0, k = 0;
+        for(let j=-1; j<=1; j++){
+          for(let i=-1; i<=1; i++){
+            const val = gray[(y+j)*w + (x+i)];
+            sx += val * gx[k];
+            sy += val * gy[k];
+            k++;
+          }
+        }
+        const mag = Math.sqrt(sx*sx + sy*sy);
+        out[y*w+x] = mag > threshold ? 1 : 0;
+      }
+    }
+    return out;
+  }
+
+  function countCutPaths(edges, w, h){
+    const visited = new Uint8Array(w*h);
+    let components = 0;
+    const stack = [];
+    const minSize = 4;
+    for(let y=0; y<h; y++){
+      for(let x=0; x<w; x++){
+        const idx = y*w+x;
+        if(edges[idx] === 1 && !visited[idx]){
+          let size = 0;
+          stack.push(idx);
+          visited[idx] = 1;
+          while(stack.length){
+            const cur = stack.pop();
+            size++;
+            const cx = cur % w, cy = Math.floor(cur / w);
+            for(let dy=-1; dy<=1; dy++){
+              for(let dx=-1; dx<=1; dx++){
+                if(dx===0 && dy===0) continue;
+                const nx = cx+dx, ny = cy+dy;
+                if(nx>=0 && nx<w && ny>=0 && ny<h){
+                  const nIdx = ny*w+nx;
+                  if(edges[nIdx]===1 && !visited[nIdx]){
+                    visited[nIdx] = 1;
+                    stack.push(nIdx);
+                  }
+                }
+              }
+            }
+          }
+          if(size >= minSize) components++;
+        }
+      }
+    }
+    return components;
+  }
+
+  function renderResult(){
+    if(lastCuts === null) return;
+    const tier = PRICING[sizeSelect.value];
+    const extraCuts = Math.max(0, lastCuts - tier.included);
+    const extraSteps = Math.ceil(extraCuts / 60);
+    const surcharge = extraSteps * tier.step;
+    const total = tier.base + surcharge;
+    resultBox.innerHTML = `
+      <div class="qr-row"><span>Size</span><span>${tier.label}</span></div>
+      <div class="qr-row"><span>Estimated cuts</span><span>${lastCuts}</span></div>
+      <div class="qr-row"><span>Base price</span><span>$${tier.base.toFixed(2)}</span></div>
+      <div class="qr-row"><span>Detail surcharge</span><span>${surcharge > 0 ? '+$' + surcharge.toFixed(2) : '$0.00'}</span></div>
+      <div class="qr-total"><span>Estimated price</span><span>$${total.toFixed(2)}</span></div>
+    `;
+  }
+})();
+</script>
+</body>
+</html>

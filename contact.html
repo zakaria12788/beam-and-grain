@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Beam & Grain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="logo"><span class="logo-mark"></span>Beam &amp; Grain</a>
+    <div class="nav-links">
+      <a href="portraits.html">Portraits</a>
+      <a href="process.html">Process</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="quote.html">Get a Quote</a>
+      <a href="pricing.html">Pricing</a>
+    </div>
+    <a href="contact.html" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<section id="contact" class="page-head">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Get in touch</div>
+      <h2>Start your portrait</h2>
+      <p>Based in Hamilton, Ontario &mdash; local pickup available, delivery arranged on request.</p>
+    </div>
+    <div class="contact-panel">
+      <ul class="contact-list">
+        <li><span>Email</span><span>hello@beamandgrain.ca</span></li>
+        <li><span>Instagram</span><span>@beamandgrain</span></li>
+        <li><span>Service area</span><span>Hamilton, ON</span></li>
+        <li><span>Turnaround</span><span>3&ndash;5 days</span></li>
+      </ul>
+      <form onsubmit="event.preventDefault(); alert('This form needs an email service connected \u2014 try Formspree or a mailto link for now.');">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name" required>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@email.com" required>
+        <label for="details">What do you have in mind?</label>
+        <textarea id="details" rows="3" placeholder="Size, wood, occasion &mdash; whatever you know so far"></textarea>
+        <button type="submit">Send request</button>
+        <p class="form-note">This is a placeholder form &mdash; connect it to Formspree, or swap it for a mailto: link, before going live.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Beam &amp; Grain &mdash; Hamilton, ON</div>
+    <div>Made to order, one panel at a time</div>
+  </div>
+</footer>
+
+</body>
+</html>
