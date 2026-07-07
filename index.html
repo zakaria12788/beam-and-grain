@@ -15,18 +15,20 @@
     position: relative;
     border: 1px solid rgba(224, 168, 81, 0.15);
     background: #14120f;
-    padding: 30px;
+    padding: 20px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
   }
 
   .family-svg {
     width: 100%;
-    height: auto;
-    max-width: 400px;
+    height: 100%;
+    max-width: 420px;
   }
 
   .family-svg path {
@@ -35,29 +37,29 @@
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    opacity: 0.85;
-    /* Triggers the live-drawing vector effect */
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
-    animation: drawPortrait 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0.9;
+    /* High dasharray value to account for long detailed continuous paths */
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: drawDetailedPortrait 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   }
 
-  @keyframes drawPortrait {
+  @keyframes drawDetailedPortrait {
     to {
       stroke-dashoffset: 0;
     }
   }
 
-  /* Light glow effect on hover */
+  /* Laser-engraved burn light glow effect on hover */
   .hero-gallery-box:hover .family-svg path {
     stroke: #ffbd59;
-    filter: drop-shadow(0 0 4px rgba(255, 189, 89, 0.6));
+    filter: drop-shadow(0 0 5px rgba(255, 189, 89, 0.7));
     transition: stroke 0.3s ease, filter 0.3s ease;
   }
 
   .vector-label {
-    margin-top: 20px;
-    font-family: 'IBM+Plex+Mono', monospace;
+    margin-top: 15px;
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.15em;
     color: rgba(224, 168, 81, 0.5);
@@ -99,18 +101,25 @@
 
     <!-- Right Animated Vector Column -->
     <div class="hero-gallery-box">
-      <!-- Native Vector Paths for Family and Dog -->
-      <svg class="family-svg" viewBox="0 0 200 200">
-        <!-- Father Outline -->
-        <path d="M55,60 C55,40 75,35 85,45 C90,40 100,42 105,55 C105,70 95,85 85,85 C70,85 55,75 55,60 M62,52 C65,50 70,50 72,53 M88,53 C90,50 95,50 98,52 M70,68 C75,75 80,75 85,68 M55,78 C40,95 30,120 35,160 M100,74 C115,90 125,110 135,140" />
-        <!-- Mother Outline -->
-        <path d="M115,70 C110,45 130,40 145,45 C155,50 165,65 160,90 C155,110 140,115 130,115 C115,115 115,90 115,70 M125,65 C128,62 134,62 136,65 M144,65 C146,62 152,62 155,65 M132,82 C138,88 144,88 148,82 M152,88 C165,105 180,120 190,150" />
-        <!-- Child Outline -->
-        <path d="M90,95 C85,80 105,75 115,85 C120,95 115,115 105,115 C95,115 90,105 90,95 M96,92 C100,90 104,92 105,94 M111,94 C112,92 116,90 120,92 M100,104 C104,108 108,108 112,104 M92,112 C85,125 80,140 82,160 M116,112 C122,125 128,140 126,160" />
-        <!-- Dog Outline (Bottom Right) -->
-        <path d="M125,145 C120,130 145,120 165,135 C180,145 185,170 175,190 C165,195 145,195 135,185 C125,175 128,155 125,145 M132,148 C130,155 135,165 140,160 M165,152 C168,158 162,168 158,162 M142,175 C148,185 152,185 158,175 M144,178 C148,182 152,182 156,178" />
+      <svg class="family-svg" viewBox="0 0 500 500">
+        <!-- Complex detailed path trace for family & dog layout -->
+        <path d="
+          M 180,180 C 175,150 200,120 230,120 C 260,120 285,150 280,180 C 275,210 260,230 230,230 C 200,230 185,210 180,180 Z
+          M 195,165 C 200,160 210,160 215,165 M 245,165 C 250,160 260,160 265,165 
+          M 210,175 C 215,172 220,172 225,175 M 250,175 C 255,172 260,172 265,175
+          M 215,195 C 225,205 235,205 245,195 M 200,225 C 150,250 120,290 100,380 M 260,225 C 290,250 330,290 350,380
+          M 295,220 C 290,190 320,165 350,165 C 380,165 410,190 405,220 C 400,265 380,280 350,280 C 320,280 300,265 295,220 Z
+          M 315,205 C 320,200 330,200 335,205 M 365,205 C 370,200 380,200 385,205
+          M 330,235 C 340,245 360,245 370,235 M 305,275 C 320,300 360,330 430,370 M 390,265 C 410,290 440,320 470,360
+          M 225,245 C 220,220 240,200 265,200 C 290,200 310,220 305,245 C 300,270 290,285 265,285 C 240,285 230,270 225,245 Z
+          M 240,230 C 243,227 250,227 253,230 M 277,230 C 280,227 287,227 290,230
+          M 250,255 C 258,262 272,262 280,255 M 235,275 C 220,300 200,330 190,380 M 295,275 C 310,300 320,330 330,380
+          M 270,330 C 250,310 320,290 360,320 C 400,340 410,380 390,420 C 370,440 310,440 290,410 C 270,395 275,350 270,330 Z
+          M 300,345 C 295,360 310,380 320,370 M 360,350 C 365,365 350,385 340,375
+          M 315,395 C 330,415 340,415 355,395 M 320,400 C 330,410 340,410 350,400
+        " />
       </svg>
-      <div class="vector-label">Cinematic Live Draw — 210m Path</div>
+      <div class="vector-label">CINEMATIC LIVE DRAW — 210M PATH</div>
     </div>
 
   </div>
