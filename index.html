@@ -3,34 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beam & Grain — Custom Wood Portraits</title>
+<title>Beam & Grain — Laser-Engraved Portraits, Hamilton ON</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 <style>
-  /* Seamlessly fits the family image inside your existing box frame layout */
-  .hero-gallery-box {
-    position: relative;
+  /* Seamless styling for the custom portrait image inside the existing box */
+  .hero-pic img {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .hero-portrait-img {
-    width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     border-radius: 2px;
     display: block;
-    transition: filter 0.3s ease;
+    mix-blend-mode: lighten;
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
-
-  /* Mimics your signature laser-engraved light glow on hover */
-  .hero-gallery-box:hover .hero-portrait-img {
-    filter: drop-shadow(0 0 12px rgba(255, 189, 89, 0.45));
+  .hero-pic:hover img {
+    transform: scale(1.02);
+    opacity: 1;
   }
 </style>
 </head>
@@ -52,25 +45,53 @@
 
 <section class="hero page-head">
   <div class="wrap">
-    
-    <!-- Left Column: Copy & Actions -->
-    <div class="hero-text">
-      <div class="section-eyebrow">Hamilton, Ontario</div>
-      <h1>Your face,<br>cut in <span class="logo-mark-inline" style="color: var(--brand); font-style: italic;">light.</span></h1>
-      <p>
-        Beam & Grain turns a photo into a portrait burned line by line into real wood — no ink, no print, just a laser and the grain underneath. Small batch, made to order, finished by hand.
-      </p>
-      <div class="hero-actions">
-        <a href="contact.html" class="nav-cta">Start your portrait</a>
-        <a href="portraits.html" class="btn-secondary" style="margin-left: 12px; display: inline-block;">See the work</a>
+    <div class="hero-split">
+      <div class="hero-text">
+        <div class="section-eyebrow">Hamilton, Ontario</div>
+        <h1>Your face,<br>cut in <span class="logo-mark-inline" style="color:var(--ember-bright); font-style:italic;">light.</span></h1>
+        <p>Beam &amp; Grain turns a photo into a portrait burned line by line into real wood &mdash; no ink, no print, just a laser and the grain underneath. Small batch, made to order, finished by hand.</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="nav-cta">Start your portrait</a>
+          <a href="portraits.html" class="btn-secondary" style="margin-left:12px; display:inline-block;">See the work</a>
+        </div>
+      </div>
+      <div class="hero-pic">
+        <img src="hero-portrait.png" alt="Laser engraved family portrait with dog">
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Right Column: Replaced the old outline with the high-res family portrait asset -->
-    <div class="hero-gallery-box">
-      <img src="hero-portrait.png" class="hero-portrait-img" alt="Cinematic laser engraved family portrait with dog">
+<section class="home-roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Where this is going</div>
+      <h2>Portraits first, then the rest of the shop</h2>
+      <p>Beam &amp; Grain is starting with portraits and growing from there &mdash; <a href="roadmap.html" style="color:var(--ember-bright);text-decoration:underline;">see the full roadmap</a>.</p>
     </div>
-
+    <div class="roadmap">
+      <div class="road-line"></div>
+      <div class="road-items">
+        <div class="road-item active">
+          <div class="road-dot"></div>
+          <span class="road-status">Live now</span>
+          <h3>Custom portraits</h3>
+          <p>Photo-to-wood portraits, made to order and finished by hand in Hamilton.</p>
+        </div>
+        <div class="road-item">
+          <div class="road-dot"></div>
+          <span class="road-status">Next</span>
+          <h3>Custom items</h3>
+          <p>Engraved gifts, signage, and small keepsakes beyond the portrait format.</p>
+        </div>
+        <div class="road-item">
+          <div class="road-dot"></div>
+          <span class="road-status">Vision</span>
+          <h3>Custom furniture</h3>
+          <p>Engraved detailing on built furniture pieces, drawing on family MDF craft.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
